@@ -1,6 +1,5 @@
-
 public class SingleLinkedList{
-    public Node Head {get; set;} = null
+    public Node Head {get; set;} = null;
     public SingleLinkedList(){}
 
     // Time Complexity: O(1).
@@ -48,9 +47,6 @@ public class SingleLinkedList{
     // Time Complexity: O(n).
     // Auxiliary Space: O(1).
     public bool IterativeSearch(int key){
-        if(IsEmpty()){
-            return false;
-        }
         Node temp = Head;
         while(temp != null){
             if(temp.Data == key){
@@ -79,9 +75,6 @@ public class SingleLinkedList{
     // Auxiliary Space: O(1).
     public int IterativeGetLength(){
         int count = 0;
-        if(IsEmpty())
-            return count;
-
         Node temp = Head;
         while(temp != null){
             temp = temp.Next;
@@ -97,10 +90,10 @@ public class SingleLinkedList{
         return RecursiveGetLength(Head, 0);
     }
     private int RecursiveGetLength(Node current, int count){
-        if(IsEmpty())
+        if(current == null)
             return count;
 
-        return RecursiveGetLength(current.Next, count + 1)
+        return RecursiveGetLength(current.Next, count + 1);
     }
 
     // Time Complexity: O(n).
@@ -132,8 +125,8 @@ public class SingleLinkedList{
         if(current == null || current.Next == null)
             return current;
 
-        Node rest = RecursiveReverse(current.Next)
-        current.next.next = current;
+        Node rest = RecursiveReverse(current.Next);
+        current.Next.Next = current;
         current.Next = null;
 
         return rest;
@@ -152,6 +145,12 @@ public class SingleLinkedList{
     public void DeleteLast(){
         if(IsEmpty())
             return;
+
+        if(Head.Next == null){
+            Head = Head.Next;
+            return;
+        }
+
         Node current = Head, previous = null;
         while(current.Next != null){
             previous = current;
@@ -162,26 +161,27 @@ public class SingleLinkedList{
 
     // Time Complexity: O(n).
     // Auxiliary Space: O(1).
-    public void DeleteN(int position){
+    public void DeleteNth(int position){
         // Null
         // A
         // A -> B
         // A -> B -> C
-        if(IsEmpty() || (position < 1))
-            return
+        if(IsEmpty() || (position < 0))
+            return;
 
-        Node current = Head, previous = null;
-        if(position == 1){
+        if(position == 0){
             Head = Head.Next;
-            current = null;
+            return;
         }
 
-        for(int i = 1 ; i < position ; i++){
-            if(current != null){
+        Node current = Head, previous = null;
+        for(int i = 0 ; i < position ; i++){
+            if(current != null && current.Next != null){
                 previous = current;
                 current = current.Next;
             }
             else{
+                // Length of list is: i+1
                 return;
             }
         }
@@ -189,8 +189,73 @@ public class SingleLinkedList{
         previous.Next = current.Next;
     }
 
+    // Time Complexity: O(n).
+    // Auxiliary Space: O(1).
+    public int GetNthFromStart(int index){
+        // Null
+        // A
+        // A -> B
+        // A -> B -> C
+        if(IsEmpty() || index < 0)
+            return -1;
+
+        Node current = Head;
+        int i = 0;
+        while(i < index){
+            if(current.Next != null){
+                current = current.Next;
+                i++;
+            }
+            else{
+                // Length of list is: i+1
+                return -1;
+            }
+        }
+
+        return current.Data;
+    }
+
+    // Time Complexity: O(n).
+    // Auxiliary Space: O(1).
+    public int GetNthFromLast(int index){
+        // Null
+        // A
+        // A -> B
+        // A -> B -> C
+        if(IsEmpty() || index < 0)
+            return -1;
+
+        // Node index = (Length - index - 1)
+        int nodeIndex = IterativeGetLength() - index - 1;
+        Node current = Head;
+        int i = 0;
+        while(i < index){
+            if(current.Next != null){
+                current = current.Next;
+                i++;
+            }
+            else{
+                // Length of list is: i+1
+                return -1;
+            }
+        }
+
+        return current.Data;
+    }
+
     public bool IsEmpty(){
         return Head == null;
+    }
+
+    public void Print(){
+        Node current = Head;
+        while(current != null){
+            if(current.Next == null)
+                Console.Write($"{current.Data} -> null");
+            else
+                 Console.Write($"{current.Data} -> ");
+            current = current.Next;
+        }
     }
 }
 
