@@ -12,7 +12,7 @@ public namespace ProblemSolving.DataStructures.LinkedList.Single
 
     public class SingleLinkedList
     {
-        public Node Head { get; set; } = null;
+        private Node Head;
         public SingleLinkedList() { }
 
         // Time Complexity: O(1).
@@ -291,11 +291,15 @@ public namespace ProblemSolving.DataStructures.LinkedList.Single
             return current.Data;
         }
 
+        // Time Complexity: O(1).
+        // Auxiliary Space: O(1).
         public bool IsEmpty()
         {
             return Head == null;
         }
 
+        // Time Complexity: O(n).
+        // Auxiliary Space: O(1).
         public void Print()
         {
             Node current = Head;
