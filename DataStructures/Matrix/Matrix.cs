@@ -4,23 +4,24 @@ public namespace ProblemSolving.DataStructures.Matrix
     {
         private int Length;
 
-        private int[,] Matrix;
+        private int[,] MatrixArray;
 
-        public Matrix1(int[,] matrix)
+        public Matrix(int[,] matrix)
         {
-            Matrix = matrix;
-            Length = Matrix.GetLength(0);
+            MatrixArray = matrix;
+            // Todo: check the if the n equal m
+            Length = MatrixArray.GetLength(0);
         }
 
         // Time Complexity: O(n^2).
         // Auxiliary Space: O(1).
         public void IterativePrint()
         {
-            for (int i = 0; i < Matrix.GetLength(0); i++)
+            for (int i = 0; i < Length; i++)
             {
-                for (int j = 0; j < Matrix.GetLength(1) ; j++)
+                for (int j = 0; j < Length; j++)
                 {
-                    Console.WriteLine($"Element[{i},{j}] = {Matrix[i, j]}");
+                    Console.WriteLine($"Element[{i},{j}] = {MatrixArray[i, j]}");
                 }
             }
         }
@@ -34,20 +35,20 @@ public namespace ProblemSolving.DataStructures.Matrix
 
         private void RecursivePrint(int row, int column)
         {
-            if (row == Matrix.GetLength(0) - 1 && column == Matrix.GetLength(1) - 1)
+            if (row == Length - 1 && column == Length - 1)
             {
-                Console.WriteLine($"Element[{row},{column}] = {Matrix[row, column]}");
+                Console.WriteLine($"Element[{row},{column}] = {MatrixArray[row, column]}");
                 return;
             }
 
-            Console.WriteLine($"Element[{row},{column}] = {Matrix[row, column]}");
+            Console.WriteLine($"Element[{row},{column}] = {MatrixArray[row, column]}");
 
-            if (column < Matrix.GetLength(1) - 1)
+            if (column < Length - 1)
             {
                 RecursivePrint(row, column + 1);
             }
 
-            if (row < Matrix.GetLength(0) - 1)
+            if (row < Length - 1)
             {
                 RecursivePrint(row + 1, column);
             }
@@ -57,11 +58,11 @@ public namespace ProblemSolving.DataStructures.Matrix
         // Auxiliary Space: O(1).
         public bool Search(int key)
         {
-            for (int i = 0; i < Matrix.GetLength(0); i++)
+            for (int i = 0; i < Length; i++)
             {
-                for (int j = 0; j < Matrix.GetLength(1) ; j++)
+                for (int j = 0; j < Length; j++)
                 {
-                    if (Matrix[i, j] == key)
+                    if (MatrixArray[i, j] == key)
                     {
                         return true;
                     }
@@ -83,41 +84,41 @@ public namespace ProblemSolving.DataStructures.Matrix
             // 9, 10, 11, 12        13, 11, 7, 8
             // 13, 14, 15, 16       14, 15, 16, 12
 
-            int left = 0, right = Matrix.GetLength(1) - 1;
-            int top = 0, bottom = Matrix.GetLength(0) - 1;
+            int left = 0, right = Length - 1;
+            int top = 0, bottom = Length - 1;
 
             while (left < right && top < bottom)
             {
-                int temp, carry = Matrix[top, left];
+                int temp, carry = MatrixArray[top, left];
                 int row = top, column = left;
                 while (column < right)
                 {
-                    temp = Matrix[row, column + 1];
-                    Matrix[row, column + 1] = carry;
+                    temp = MatrixArray[row, column + 1];
+                    MatrixArray[row, column + 1] = carry;
                     carry = temp;
                     column++;
                 }
 
                 while (row < bottom)
                 {
-                    temp = Matrix[row + 1, column];
-                    Matrix[row + 1, column] = carry;
+                    temp = MatrixArray[row + 1, column];
+                    MatrixArray[row + 1, column] = carry;
                     carry = temp;
                     row++;
                 }
 
                 while (column > left)
                 {
-                    temp = Matrix[row, column - 1];
-                    Matrix[row, column - 1] = carry;
+                    temp = MatrixArray[row, column - 1];
+                    MatrixArray[row, column - 1] = carry;
                     carry = temp;
                     column--;
                 }
 
                 while (row > top)
                 {
-                    temp = Matrix[row - 1, column];
-                    Matrix[row - 1, column] = carry;
+                    temp = MatrixArray[row - 1, column];
+                    MatrixArray[row - 1, column] = carry;
                     carry = temp;
                     row--;
                 }
