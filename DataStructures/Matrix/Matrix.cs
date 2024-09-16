@@ -27,7 +27,7 @@ public namespace ProblemSolving.DataStructures.Matrix
         }
 
         // Time Complexity: O(row*columns).
-        // Auxiliary Space: O(columns)
+        // Auxiliary Space: O(columns).
         public void RecursivePrint()
         {
             RecursivePrint(0, 0);
@@ -50,7 +50,7 @@ public namespace ProblemSolving.DataStructures.Matrix
 
             if (row < Length - 1)
             {
-                RecursivePrint(row + 1, column);
+                RecursivePrint(row + 1, 0);
             }
         }
 
@@ -72,7 +72,8 @@ public namespace ProblemSolving.DataStructures.Matrix
             return false;
         }
 
-
+        // Time Complexity: O(row*columns).
+        // Auxiliary Space: O(1).
         public void RotateStepClockWise()
         {
             // 1, 2, 3              4, 1, 2
