@@ -272,6 +272,10 @@ public namespace ProblemSolving.DataStructures.LinkedList.Single
 
             // Node index = (Length - index - 1)
             int nodeIndex = IterativeGetLength() - index - 1;
+            if(nodeIndex < 0){
+                return -1;
+            }
+            
             Node current = Head;
             int i = 0;
             while (i < index)
