@@ -73,9 +73,9 @@ public namespace ProblemSolving.DataStructures.Stack.ArrayAsStack
             {
                 for (int i = 0; i < Top - 1; i++)
                 {
-                    Console.Write($"{Elements[i]} -> ")
+                    Console.Write($"{Elements[i]} -> ");
                 }
-                Console.Write($"{Elements[i]}")
+                Console.Write($"{Elements[i]}");
             }
         }
     }

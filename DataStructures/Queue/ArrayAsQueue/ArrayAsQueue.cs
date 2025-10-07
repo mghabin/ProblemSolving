@@ -12,7 +12,7 @@ public namespace ProblemSolving.DataStructures.ArrayAsQueue
 
         public ArrayAsQueue(int size)
         {
-            Elements = new int[size]
+            Elements = new int[size];
             Max = size;
             Rear = -1;
             Front = 0;
